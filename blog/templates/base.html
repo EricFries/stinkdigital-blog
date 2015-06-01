@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+		<script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script> 
+	</head>
+
+	<body>
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<a href="/" class="navbar-brand">STINKDIGITAL-BLOG</a>
+						<ul class="nav navbar-nav pull-right">
+							<li><a href="/">Posts</a></li>
+							<li><a href="/new">New Post</a></li>
+							<li><a href="#">Admin</a></li>
+						</ul>
+					</div>
+				</nav>
+
+			<div id="content top-buffer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+
+							{% block content%}
+							{% endblock %}
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<div class='footer top-buffer' >
+      <div class='container'>
+        <div class='row'>
+
+          <div class='col-md-4'>
+          <h4>About the Author</h4>
+          <p>This author is one serious writer. </p>
+          <p><a href='/'>Author's Posts</a></p>
+          </div>
+
+          <div class='col-md-4'>
+          <ul>
+            <li><a href='/new'>New Post</a></li>
+            <li><a href='#'>Admin</a></li>
+          </ul>
+          </div>
+
+          <div class='col-md-4'>
+          <h4>Contact the Author</h4>
+          <ul>
+            <li>Brooklyn</li>
+            <li>555-NO-CALLS-PLZ</li>
+            <li><a href='mailto:ericfries@gmail.com'>ericfries@gmail.com</a></li>
+          </ul>
+          <p>Author &copy;2015.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+		</div>
+	</body>
+</html>
