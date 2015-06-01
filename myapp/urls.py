@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'blog.views.index'),
     url(r'^new/', 'blog.views.new'),
+    url(r'^create/', 'blog.views.create'),
     # url(r'^myapp/', include('myapp.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

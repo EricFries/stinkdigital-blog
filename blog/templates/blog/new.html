@@ -3,6 +3,16 @@
 {% block content %}
 
 <h1>New Post</h1>
-<p>Insert the new post form here. Post to create action, redirect to post detail page</p>
+
+<form action="/create/" method="post"> 
+	{% csrf_token %}
+	<div class="col-md-8">
+		<div class="form-group">
+		  Title: <input type="text" name="title" class="form-control"><br>
+		  Content: <textarea name="content" rows="5" class="form-control"></textarea><br>
+		<input type="submit" value="Create Post" class="form-control"/>
+	</div>
+</form>
+
 
 {% endblock content%}
