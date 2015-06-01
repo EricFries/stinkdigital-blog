@@ -1,5 +1,5 @@
 # Create your views here.
-from django.shortcuts import get_object_or_404, render_to_response, render
+from django.shortcuts import get_object_or_404, render_to_response, render, redirect
 from django.template import RequestContext
 from .models import Post
 from django.utils import timezone
@@ -22,4 +22,4 @@ def new(request):
 def create(request):
   post = Post(title = request.POST['title'], content = request.POST['content'])
   post.save()
-  return render(request, 'blog/index.html')
+  return redirect('/')
