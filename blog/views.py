@@ -11,16 +11,24 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
+from django import forms
+
 #debugger
 # import sys
 # for attr in ('stdin', 'stdout', 'stderr'):
 #     setattr(sys, attr, getattr(sys, '__%s__' % attr))
 # import pdb
 
+class PostUpdateForm(forms.ModelForm):
+  class Meta:
+    model = Post
+    exclude = ('slug', 'user', 'date')
+
 class PostUpdateView(UpdateView):
   model = Post
   success_url = '/'
   fields = ['title', 'content']
+  form_class = PostUpdateForm
 
 class PostDeleteView(DeleteView):
   model = Post
