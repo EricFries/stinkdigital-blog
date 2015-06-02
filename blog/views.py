@@ -8,6 +8,8 @@ from django.utils.text import slugify
 
 from django.contrib.auth import authenticate, login, logout
 
+from django.contrib.auth.models import User
+
 #debugger
 # import sys
 # for attr in ('stdin', 'stdout', 'stderr'):
@@ -33,7 +35,7 @@ def new(request):
 def create(request):
   #Assigns the True/False return value to 'created' so user is always an instance of User.
   # user, created = User.objects.
-  post = Post(title = request.POST['title'], content = request.POST['content'], slug = slugify(request.POST['title']))
+  post = Post(title = request.POST['title'], content = request.POST['content'], user = request.user, slug = slugify(request.POST['title']))
   post.save()
   return redirect("/post/%s" % post.slug)
 
