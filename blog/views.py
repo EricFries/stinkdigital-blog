@@ -1,13 +1,13 @@
-# Create your views here.
 from django.shortcuts import get_object_or_404, render_to_response, render, redirect
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.template import RequestContext
 from .models import Post
 
 from django.utils.text import slugify
 
+#Login/Authentication
 from django.contrib.auth import authenticate, login, logout
-
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
@@ -16,6 +16,10 @@ from django.contrib.auth.decorators import login_required
 # for attr in ('stdin', 'stdout', 'stderr'):
 #     setattr(sys, attr, getattr(sys, '__%s__' % attr))
 # import pdb
+
+class DeletePostView(DeleteView):
+  model = Post
+  success_url = '/'
 
 class PostDetailView(DetailView):
   model = Post
