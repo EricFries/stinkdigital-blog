@@ -4,8 +4,9 @@
 	<h1>All posts</h1>
 	{% for post in posts %}
 		<h2>{{ post.title }}</h2>
-		<h4>Posted by {{ post.user.name}} on [INSERT DATE]</h4>
-		<p>{{ post.content }}</p>
+		<h4>Posted by {{ post.user.name}} on {{ post.date|date }}</h4>
+		<p>{{ post.content|truncatewords:80 }}</p>
+		<a href="/post/{{ post.slug}}">Continue Reading</a>
 	{% endfor %}
 
 {% endblock content%}

@@ -1,4 +1,6 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, include, url 
+
+from blog.views import PostDetailView
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -7,8 +9,9 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'blog.views.index'),
-    url(r'^new/', 'blog.views.new'),
-    url(r'^create/', 'blog.views.create'),
+    url(r'^post/new/', 'blog.views.new'),
+    url(r'^post/create/', 'blog.views.create'),
+    url(r'^post/(?P<slug>[-\w]+)/$', PostDetailView.as_view(), name='post-detail'),
     # url(r'^myapp/', include('myapp.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
