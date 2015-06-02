@@ -12,14 +12,18 @@ urlpatterns = patterns('',
     url(r'^post/new/', 'blog.views.new'),
     url(r'^post/create/', 'blog.views.create'),
     url(r'^post/(?P<slug>[-\w]+)/$', PostDetailView.as_view(), name='post-detail'),
+    url(r'^login/', 'blog.views.login_view'),
+    url(r'^logout/', 'blog.views.logout_view'),
+    url(r'^accounts/auth/', 'blog.views.auth_view')
+    )
     # url(r'^myapp/', include('myapp.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
-)
+#     url(r'^admin/', include(admin.site.urls)),
+# )
 
 # urlpatterns = [
 #     url(r'^$', views.index, name='index'),

@@ -2,10 +2,17 @@
 from django.shortcuts import get_object_or_404, render_to_response, render, redirect
 from django.views.generic.detail import DetailView
 from django.template import RequestContext
-from .models import Post, User
-from django.utils import timezone
+from .models import Post
+
 from django.utils.text import slugify
-import pdb
+
+from django.contrib.auth import authenticate, login, logout
+
+#debugger
+# import sys
+# for attr in ('stdin', 'stdout', 'stderr'):
+#     setattr(sys, attr, getattr(sys, '__%s__' % attr))
+# import pdb
 
 class PostDetailView(DetailView):
   model = Post
@@ -25,8 +32,26 @@ def new(request):
 
 def create(request):
   #Assigns the True/False return value to 'created' so user is always an instance of User.
-  user, created = User.objects.get_or_create(name="Eric")
+  # user, created = User.objects.
   post = Post(title = request.POST['title'], content = request.POST['content'], slug = slugify(request.POST['title']))
-  post.user = user
   post.save()
   return redirect("/post/%s" % post.slug)
+
+def login_view(request):
+  return render(request, 'blog/login.html')
+
+def logout_view(request):
+  logout(request)
+  return redirect('/')
+
+def auth_view(request):
+  username = request.POST['username']
+  password = request.POST['password']
+  user = authenticate(username=username, password=password)
+  if user is not None:
+    login(request, user)
+    return redirect('/')
+  else:
+    #add failed to login error
+     return redirect('/login')
+  
