@@ -9,6 +9,7 @@ from django.utils.text import slugify
 from django.contrib.auth import authenticate, login, logout
 
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 #debugger
 # import sys
@@ -29,9 +30,11 @@ def index(request):
   return render_to_response('blog/index.html', locals(), context_instance=RequestContext(request)
     )
 
+@login_required
 def new(request):
   return render(request, 'blog/new.html')
 
+@login_required
 def create(request):
   #Assigns the True/False return value to 'created' so user is always an instance of User.
   # user, created = User.objects.
