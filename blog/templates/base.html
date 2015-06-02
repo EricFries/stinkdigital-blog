@@ -10,15 +10,17 @@
 				<div class="container-fluid">
 					<a href="/" class="navbar-brand">STINKDIGITAL-BLOG</a>
 						<ul class="nav navbar-nav pull-right">
-							<li><a href="/">Posts</a></li>
-							
-							<li><a href="/login">Login</a></li>
+							<li><a href="/">All Posts</a></li>
+	
 							{% if user.is_authenticated %}
 								<li>Welcome, {{ user.username }} !</li>
 							  <li><a href="/post/new">New Post</a></li>
-							<li><a href="#">Admin</a></li>
+								<li><a href="#">Admin</a></li>
 							  <li><a href="/logout">Logout</a></li>
+						  {% else %}
+						  	<li><a href="/login">Login</a></li>
 							{% endif %}
+
 						</ul>
 					</div>
 				</nav>
