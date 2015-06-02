@@ -11,3 +11,6 @@ class Post(models.Model):
   user = models.ForeignKey(User)
   date = models.DateTimeField(auto_now_add=True)
   slug = models.SlugField(max_length=255, unique=True)
+
+  def __unicode__(self):
+        return self.title

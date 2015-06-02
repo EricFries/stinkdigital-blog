@@ -17,7 +17,12 @@ from django.contrib.auth.decorators import login_required
 #     setattr(sys, attr, getattr(sys, '__%s__' % attr))
 # import pdb
 
-class DeletePostView(DeleteView):
+class PostUpdateView(UpdateView):
+  model = Post
+  success_url = '/'
+  fields = ['title', 'content']
+
+class PostDeleteView(DeleteView):
   model = Post
   success_url = '/'
 
