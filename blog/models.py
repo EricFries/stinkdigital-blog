@@ -24,3 +24,6 @@ class Comment(models.Model):
   
   def __unicode__(self):
     return self.content
+
+class Tag(models.Model):
+  name = models.TextField(max_length= 50, unique=True)

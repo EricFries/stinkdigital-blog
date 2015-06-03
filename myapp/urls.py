@@ -18,6 +18,8 @@ urlpatterns = patterns('',
 
     url(r'^comment/create/', 'blog.views.comment_create'),
     url(r'^comment/delete/', 'blog.views.comment_delete'),
+    url(r'^tag/new/', 'blog.views.tag_new'),
+    url(r'^tag/create/', 'blog.views.tag_create'),
 
     url(r'^login/', 'blog.views.login_view'),
     url(r'^logout/', 'blog.views.logout_view'),

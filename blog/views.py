@@ -15,6 +15,16 @@ from django import forms
 
 import pdb
 
+def tag_new(request):
+  return render(request, 'blog/tag_new.html')
+
+def tag_create(request):
+  tag = Tag(name = request.POST['name'])
+  tag.save()
+  post_slug = request.POST['post_slug']
+  success_url = "/post/%s" % post_slug
+  return redirect(success_url)
+
 @login_required
 def comment_delete(request):
   comment = Comment.objects.get(pk=request.POST['id'])
