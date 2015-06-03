@@ -158,3 +158,5 @@ LOGGING = {
 }
 
 LOGIN_URL = '/login'
+STATIC_ROOT = 'static'
+STATIC_URL  = '/static/'
