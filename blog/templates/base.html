@@ -13,9 +13,9 @@
 							<li><a href="/">All Posts</a></li>
 	
 							{% if user.is_authenticated %}
-								<p class="navbar-text">Welcome, {{ user.username }} !</p>
 							  <li><a href="/post/new">New Post</a></li>
 							  <li><a href="/logout">Logout</a></li>
+								<p class="navbar-text">Welcome, {{ user.username }} !</p>
 						  {% else %}
 						  	<li><a href="/login">Login</a></li>
 							{% endif %}

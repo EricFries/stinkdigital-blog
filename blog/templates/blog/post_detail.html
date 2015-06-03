@@ -17,19 +17,20 @@
 			</ul>
 		</div>
 
-		<div class="row">
-			<form action="/comment/delete/" method="post"> 
-				{% csrf_token %}
-				<div class="col-md-6">
-					<div class="form-group">
-					  <input type="hidden" name="id" value="{{ comment.id }}">
-					  <input type="hidden" name="post_slug" value="{{ post.slug }}">
-						<input type="submit" value="Delete Comment" class="form-control btn btn-danger"/>
+		{% if user.is_authenticated %}
+			<div class="row">
+				<form action="/comment/delete/" method="post"> 
+					{% csrf_token %}
+					<div class="col-md-6">
+						<div class="form-group">
+						  <input type="hidden" name="id" value="{{ comment.id }}">
+						  <input type="hidden" name="post_slug" value="{{ post.slug }}">
+							<input type="submit" value="Delete Comment" class="form-control btn btn-danger"/>
+						</div>
 					</div>
-				</div>
-			</form>
-		</div>
-
+				</form>
+			</div>
+		{% endif %}
 	{% endfor %}
 {% endif %}
 
