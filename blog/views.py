@@ -13,6 +13,8 @@ from django.contrib.auth.decorators import login_required
 
 from django import forms
 
+import pdb
+
 @login_required
 def comment_delete(request):
   comment = Comment.objects.get(pk=request.POST['id'])
@@ -34,7 +36,7 @@ class PostUpdateForm(forms.ModelForm):
 
 class PostUpdateView(UpdateView):
   model = Post
-  success_url = '/'
+  # success_url = '/'
   fields = ['title', 'content']
   form_class = PostUpdateForm
 
