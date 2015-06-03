@@ -1,42 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ post.title }}</h1>
-<p>Posted by {{ post.user.username}} on {{ post.date|date }}</p>
-<p>{{ post.content }}</p>
+
+<div class="post">
+	<h1>{{ post.title }}</h1>
+	<p>Posted by {{ post.user.username}} on {{ post.date|date }}</p>
+	<p>{{ post.content }}</p>
+</div>
 
 {% if post.comment_set.all %}
 	<h4>Comments: </h4>
 	{% for comment in post.comment_set.all %}
-		<ul>
-			<li>{{comment.content}}</li>
-		  <li>By <a href='mailto:{{comment.email}}'>{{comment.name}}</a> </li>
-		</ul>
-		
-		<form action="/comment/delete/" method="post"> 
-			{% csrf_token %}
-				<div class="form-group">
-				  <input type="hidden" name="id" value="{{ comment.id }}">
-				  <input type="hidden" name="post_slug" value="{{ post.slug }}">
-					<input type="submit" value="Delete Comment" class="form-control"/>
-			</div>
-		</form>
-		<br>
+		<div class="comment">
+			<ul>
+				<li>{{comment.content}}</li>
+			  <li>by <a href='mailto:{{comment.email}}'>{{comment.name}}</a> at {{comment.date|date}} </li>
+			</ul>
+		</div>
+
+		<div class="row">
+			<form action="/comment/delete/" method="post"> 
+				{% csrf_token %}
+				<div class="col-md-6">
+					<div class="form-group">
+					  <input type="hidden" name="id" value="{{ comment.id }}">
+					  <input type="hidden" name="post_slug" value="{{ post.slug }}">
+						<input type="submit" value="Delete Comment" class="form-control btn btn-danger"/>
+					</div>
+				</div>
+			</form>
+		</div>
 
 	{% endfor %}
 {% endif %}
 
-<h4>Leave a Comment:</h4>
-<form action="/comment/create/" method="post"> 
-	{% csrf_token %}
-	<div class="col-md-6">
-		<div class="form-group">
-		  Name: <input type="text" name="name" class="form-control"><br>
-		  Email: <input type="text" name="email" class="form-control"><br>
-		  Content: <textarea name="content" rows="3" class="form-control"></textarea><br>
-		  <input type="hidden" name="post_id" value="{{ post.id }}">
-			<input type="submit" value="Comment" class="form-control"/>
+<div id="leave-comment">
+	<h4>Leave a Comment:</h4>
+	<form action="/comment/create/" method="post"> 
+		{% csrf_token %}
+		<div class="col-md-6">
+			<div class="form-group">
+			  Name: <input type="text" name="name" class="form-control"><br>
+			  Email: <input type="text" name="email" class="form-control"><br>
+			  Content: <textarea name="content" rows="3" class="form-control"></textarea><br>
+			  <input type="hidden" name="post_id" value="{{ post.id }}">
+				<input type="submit" value="Comment" class="form-control"/>
+			</div>
 		</div>
-	</div>
-</form>
+	</form>
+</div>
 
 {% endblock content%}
