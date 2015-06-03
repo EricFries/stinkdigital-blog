@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="post">
-	<h1>{{ post.title }}</h1>
+	<h1 style="display: inline">{{ post.title }}</h1>
 		{% if user.is_authenticated %}
 			<a href="/post/delete/{{ post.slug}}"><span class="glyphicon glyphicon-trash"></span></a>
 
@@ -13,38 +13,40 @@
 </div>
 
 {% if post.comment_set.all %}
+	<div id="comment-group" style="margin-top: 25px">
+			{% if post.comment_set.all|length_is:"1" %}
+				<h4>{{post.comment_set.all|length}} Comment: </h4>
 
-		{% if post.comment_set.all|length_is:"1" %}
-			<h4>{{post.comment_set.all|length}} Comment: </h4>
+				{% else %}
 
-			{% else %}
+				<h4>{{post.comment_set.all|length}} Comments:</h4>
+			{% endif %}
 
-			<h4>{{post.comment_set.all|length}} Comments:</h4>
-		{% endif %}
-
-	{% for comment in post.comment_set.all %}
-		<div class="comment">
-			<ul>
-				<li>{{comment.content}}</li>
-			  <li>by <a href='mailto:{{comment.email}}'>{{comment.name}}</a> at {{comment.date|date}} </li>
-			</ul>
-		</div>
-
-		{% if user.is_authenticated %}
-			<div class="row">
-				<form action="/comment/delete/" method="post"> 
-					{% csrf_token %}
-					<div class="col-md-6">
-						<div class="form-group">
-						  <input type="hidden" name="id" value="{{ comment.id }}">
-						  <input type="hidden" name="post_slug" value="{{ post.slug }}">
-							<input type="submit" value="Delete Comment" class="form-control btn btn-danger"/>
-						</div>
-					</div>
-				</form>
+		{% for comment in post.comment_set.all %}
+			<div class="comment">
+				<ul>
+					<li>{{comment.content}}</li>
+				  <li>by <a href='mailto:{{comment.email}}'>{{comment.name}}</a> at {{comment.date|date}} </li>
+				</ul>
 			</div>
-		{% endif %}
-	{% endfor %}
+
+			{% if user.is_authenticated %}
+				<div class="row">
+					<form action="/comment/delete/" method="post"> 
+						{% csrf_token %}
+						<div class="col-md-6">
+							<div class="form-group">
+							  <input type="hidden" name="id" value="{{ comment.id }}">
+							  <input type="hidden" name="post_slug" value="{{ post.slug }}">
+								<input type="submit" value="Delete Comment" class="form-control btn btn-danger"/>
+							</div>
+						</div>
+					</form>
+				</div>
+
+			{% endif %}
+		{% endfor %}
+	</div>
 {% endif %}
 
 <div id="leave-comment">
