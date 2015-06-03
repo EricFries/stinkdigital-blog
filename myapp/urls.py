@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^post/edit/(?P<slug>[-\w]+)/$', login_required(PostUpdateView.as_view())),
 
     url(r'^comment/create/', 'blog.views.comment_create'),
+    url(r'^comment/delete/', 'blog.views.comment_delete'),
 
     url(r'^login/', 'blog.views.login_view'),
     url(r'^logout/', 'blog.views.logout_view'),

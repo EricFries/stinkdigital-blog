@@ -19,6 +19,13 @@ from django import forms
 #     setattr(sys, attr, getattr(sys, '__%s__' % attr))
 # import pdb
 
+def comment_delete(request):
+  comment = Comment.objects.get(pk=request.POST['id'])
+  post_slug = request.POST['post_slug']
+  success_url = "/post/%s" % post_slug
+  comment.delete()
+  return redirect(success_url)
+
 def comment_create(request):
   post = Post.objects.get(pk=request.POST['post_id'])
   comment = Comment(content = request.POST['content'], name = request.POST['name'], email = request.POST['email'], post = post)
