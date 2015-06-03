@@ -1,8 +1,8 @@
-from django.shortcuts import get_object_or_404, render_to_response, render, redirect
+from django.shortcuts import render_to_response, render, redirect
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.template import RequestContext
-from .models import Post
+from .models import Post, Comment
 
 from django.utils.text import slugify
 
@@ -13,11 +13,18 @@ from django.contrib.auth.decorators import login_required
 
 from django import forms
 
-#debugger
+# debugger
 # import sys
 # for attr in ('stdin', 'stdout', 'stderr'):
 #     setattr(sys, attr, getattr(sys, '__%s__' % attr))
 # import pdb
+
+def comment_create(request):
+  post = Post.objects.get(pk=request.POST['post_id'])
+  comment = Comment(content = request.POST['content'], name = request.POST['name'], email = request.POST['email'], post = post)
+  comment.save
+  post.save
+  return redirect("/post/%s" % post.slug)
 
 class PostUpdateForm(forms.ModelForm):
   class Meta:

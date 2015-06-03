@@ -13,4 +13,13 @@ class Post(models.Model):
   slug = models.SlugField(max_length=255, unique=True)
 
   def __unicode__(self):
-        return self.title
+    return self.title
+
+class Comment(models.Model):
+  content = models.TextField()
+  name = models.CharField(max_length=42)
+  email = models.EmailField(max_length=75)
+  post = models.ForeignKey(Post)
+
+  def __unicode__(self):
+    return self.title
