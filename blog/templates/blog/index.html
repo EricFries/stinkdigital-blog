@@ -19,10 +19,9 @@
 		{% endif %}
 
 		{% if user.is_authenticated %}
-		<div id="post-controls">
-			<p><a href="/post/delete/{{ post.slug}}">Delete Post</a> | 
-			<a href="/post/edit/{{ post.slug}}">Edit Post</a></p>
-		</div>
+			<a href="/post/delete/{{ post.slug}}"><span class="glyphicon glyphicon-trash"></span></a>
+
+			<a href="/post/edit/{{ post.slug}}"><span class="glyphicon glyphicon-pencil"></span></a>
 		{% endif %}
 
 		<p>{{ post.content|truncatewords:80 }}</p>
