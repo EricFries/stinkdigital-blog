@@ -55,15 +55,15 @@ def index(request):
   return render_to_response('blog/index.html', locals(), context_instance=RequestContext(request)
     )
 
-@login_required
+# @login_required
 def new(request):
   return render(request, 'blog/new.html')
 
-@login_required
+# @login_required
 def create(request):
   #Assigns the True/False return value to 'created' so user is always an instance of User.
   # user, created = User.objects.
-  post = Post(title = request.POST['title'], content = request.POST['content'], user = request.user, slug = slugify(request.POST['title']))
+  post = Post(title = request.POST['title'], content = request.POST['content'], slug = slugify(request.POST['title']))
   post.save()
   return redirect("/post/%s" % post.slug)
 

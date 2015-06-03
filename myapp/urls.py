@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^post/create/', 'blog.views.create'),
     url(r'^post/(?P<slug>[-\w]+)/$', PostDetailView.as_view(), name='post-detail'),
     url(r'^post/delete/(?P<slug>[-\w]+)/$', login_required(PostDeleteView.as_view())),
-    url(r'^post/edit/(?P<slug>[-\w]+)/$', login_required(PostUpdateView.as_view())),
+    url(r'^post/edit/(?P<slug>[-\w]+)/$', PostUpdateView.as_view()),
 
     url(r'^comment/create/', 'blog.views.comment_create'),
     url(r'^comment/delete/', 'blog.views.comment_delete'),
