@@ -6,16 +6,28 @@
 	</center>
 	
 	{% for post in posts %}
+	<div class="post-summary">
 		<h2>{{ post.title }}</h2>
 		<h4>Posted by {{ post.user.username}} on {{ post.date|date }}</h4>
 
+		{% if post.comment_set.all|length_is:"1" %}
+			<p>{{post.comment_set.all|length}} Comment</p>
+
+			{% else %}
+
+			<p>{{post.comment_set.all|length}} Comments</p>
+		{% endif %}
+
 		{% if user.is_authenticated %}
+		<div id="post-controls">
 			<a href="/post/delete/{{ post.slug}}">Delete</a>
 			<a href="/post/edit/{{ post.slug}}">Edit</a>
+		</div>
 		{% endif %}
 
 		<p>{{ post.content|truncatewords:80 }}</p>
 		<a href="/post/{{ post.slug}}">Continue Reading...</a>
+	</div>
 	{% endfor %}
 
 {% endblock content%}

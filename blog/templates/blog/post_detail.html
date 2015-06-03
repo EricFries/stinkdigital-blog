@@ -8,7 +8,15 @@
 </div>
 
 {% if post.comment_set.all %}
-	<h4>Comments: </h4>
+
+		{% if post.comment_set.all|length_is:"1" %}
+			<h4>{{post.comment_set.all|length}} Comment: </h4>
+
+			{% else %}
+
+			<h4>{{post.comment_set.all|length}} Comments:</h4>
+		{% endif %}
+
 	{% for comment in post.comment_set.all %}
 		<div class="comment">
 			<ul>
