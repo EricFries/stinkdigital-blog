@@ -14,16 +14,16 @@ from django.contrib.auth.decorators import login_required
 from django import forms
 
 # debugger
-# import sys
-# for attr in ('stdin', 'stdout', 'stderr'):
-#     setattr(sys, attr, getattr(sys, '__%s__' % attr))
-# import pdb
+import sys
+for attr in ('stdin', 'stdout', 'stderr'):
+    setattr(sys, attr, getattr(sys, '__%s__' % attr))
+import pdb
 
 def comment_create(request):
   post = Post.objects.get(pk=request.POST['post_id'])
   comment = Comment(content = request.POST['content'], name = request.POST['name'], email = request.POST['email'], post = post)
-  comment.save
-  post.save
+  comment.save()
+  post.save()
   return redirect("/post/%s" % post.slug)
 
 class PostUpdateForm(forms.ModelForm):
@@ -54,15 +54,15 @@ def index(request):
   return render_to_response('blog/index.html', locals(), context_instance=RequestContext(request)
     )
 
-@login_required
+# @login_required
 def new(request):
   return render(request, 'blog/new.html')
 
-@login_required
+# @login_required
 def create(request):
   #Assigns the True/False return value to 'created' so user is always an instance of User.
   # user, created = User.objects.
-  post = Post(title = request.POST['title'], content = request.POST['content'], user = request.user, slug = slugify(request.POST['title']))
+  post = Post(title = request.POST['title'], content = request.POST['content'], slug = slugify(request.POST['title']))
   post.save()
   return redirect("/post/%s" % post.slug)
 
