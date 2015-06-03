@@ -20,8 +20,8 @@
 
 		{% if user.is_authenticated %}
 		<div id="post-controls">
-			<a href="/post/delete/{{ post.slug}}">Delete</a>
-			<a href="/post/edit/{{ post.slug}}">Edit</a>
+			<p><a href="/post/delete/{{ post.slug}}">Delete Post</a> | 
+			<a href="/post/edit/{{ post.slug}}">Edit Post</a></p>
 		</div>
 		{% endif %}
 
