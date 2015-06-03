@@ -5,6 +5,7 @@
 <p>{{ post.content }}</p>
 
 {% if post.comment_set.all %}
+	<h4>Comments: </h4>
 	{% for comment in post.comment_set.all %}
 		<ul>
 		  <li>Name: {{comment.name}}</li>
@@ -12,9 +13,10 @@
 			<li>{{comment.content}}</li>
 		</ul>
 	{% endfor %}
+
 {% endif %}
 
-<h4>Leave a Comment</h4>
+<h4>Leave a Comment:</h4>
 <form action="/comment/create/" method="post"> 
 	{% csrf_token %}
 	<div class="col-md-6">
