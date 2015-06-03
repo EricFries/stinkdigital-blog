@@ -13,12 +13,6 @@ from django.contrib.auth.decorators import login_required
 
 from django import forms
 
-# debugger
-# import sys
-# for attr in ('stdin', 'stdout', 'stderr'):
-#     setattr(sys, attr, getattr(sys, '__%s__' % attr))
-# import pdb
-
 @login_required
 def comment_delete(request):
   comment = Comment.objects.get(pk=request.POST['id'])

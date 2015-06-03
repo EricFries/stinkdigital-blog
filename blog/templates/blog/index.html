@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
-	<h1>STINKDIGITAL-BLOG</h1>
+	<center>
+		<h1>STINKDIGITAL-BLOG</h1>
+	</center>
+	
 	{% for post in posts %}
 		<h2>{{ post.title }}</h2>
 		<h4>Posted by {{ post.user.username}} on {{ post.date|date }}</h4>
