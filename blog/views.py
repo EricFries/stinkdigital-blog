@@ -82,6 +82,6 @@ def auth_view(request):
     login(request, user)
     return redirect('/')
   else:
-    #add failed to login error
-     return redirect('/login')
+    messages.error(request, 'Failed to login. Please try again.')
+    return redirect('/login')
   
