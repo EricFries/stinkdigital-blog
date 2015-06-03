@@ -20,6 +20,7 @@ class Comment(models.Model):
   name = models.CharField(max_length=42)
   email = models.EmailField(max_length=75)
   post = models.ForeignKey(Post)
-
+  date = models.DateTimeField(auto_now_add=True)
+  
   def __unicode__(self):
     return self.content
