@@ -22,8 +22,7 @@ from django import forms
 def comment_create(request):
   post = Post.objects.get(pk=request.POST['post_id'])
   comment = Comment(content = request.POST['content'], name = request.POST['name'], email = request.POST['email'], post = post)
-  comment.save
-  post.save
+  comment.save()
   return redirect("/post/%s" % post.slug)
 
 class PostUpdateForm(forms.ModelForm):

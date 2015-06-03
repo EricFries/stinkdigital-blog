@@ -5,11 +5,11 @@
 <p>{{ post.content }}</p>
 
 {% if post.comment_set.all %}
-	<ul>
 	{% for comment in post.comment_set.all %}
-	  <li>{{comment.name}}</li>
-	  <li>{{comment.email}}</li>
-		<li>{{comment.content}}</li>
+		<ul>
+		  <li>Name: {{comment.name}}</li>
+		  <li>Email: {{comment.email}}</li>
+			<li>{{comment.content}}</li>
 		</ul>
 	{% endfor %}
 {% endif %}
