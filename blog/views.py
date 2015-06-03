@@ -19,6 +19,7 @@ from django import forms
 #     setattr(sys, attr, getattr(sys, '__%s__' % attr))
 # import pdb
 
+@login_required
 def comment_delete(request):
   comment = Comment.objects.get(pk=request.POST['id'])
   post_slug = request.POST['post_slug']
