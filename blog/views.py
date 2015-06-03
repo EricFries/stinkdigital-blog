@@ -3,28 +3,30 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.template import RequestContext
 from .models import Post, Comment
-
 from django.utils.text import slugify
+from django import forms
 
 #Login/Authentication
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from django import forms
+
+
+#Post CRUD views
+def posts_index(request):
+  posts = Post.objects.all().order_by('-date')
+  return render_to_response('blog/index.html', locals(), context_instance=RequestContext(request)
+    )
 
 @login_required
-def comment_delete(request):
-  comment = Comment.objects.get(pk=request.POST['id'])
-  post_slug = request.POST['post_slug']
-  success_url = "/post/%s" % post_slug
-  comment.delete()
-  return redirect(success_url)
+def post_new(request):
+  return render(request, 'blog/new.html')
 
-def comment_create(request):
-  post = Post.objects.get(pk=request.POST['post_id'])
-  comment = Comment(content = request.POST['content'], name = request.POST['name'], email = request.POST['email'], post = post)
-  comment.save()
+@login_required
+def post_create(request):
+  post = Post(title = request.POST['title'], content = request.POST['content'], user = request.user, slug = slugify(request.POST['title']))
+  post.save()
   return redirect("/post/%s" % post.slug)
 
 class PostUpdateForm(forms.ModelForm):
@@ -49,24 +51,22 @@ class PostDetailView(DetailView):
     context = super(PostDetailView, self).get_context_data(**kwargs)
     return context
 
-def posts_index(request):
-  #Orders posts by date in descending order
-  posts = Post.objects.all().order_by('-date')
-  return render_to_response('blog/index.html', locals(), context_instance=RequestContext(request)
-    )
-
+#Comment Views
 @login_required
-def post_new(request):
-  return render(request, 'blog/new.html')
+def comment_delete(request):
+  comment = Comment.objects.get(pk=request.POST['id'])
+  post_slug = request.POST['post_slug']
+  success_url = "/post/%s" % post_slug
+  comment.delete()
+  return redirect(success_url)
 
-@login_required
-def post_create(request):
-  #Assigns the True/False return value to 'created' so user is always an instance of User.
-  # user, created = User.objects.
-  post = Post(title = request.POST['title'], content = request.POST['content'], user = request.user, slug = slugify(request.POST['title']))
-  post.save()
+def comment_create(request):
+  post = Post.objects.get(pk=request.POST['post_id'])
+  comment = Comment(content = request.POST['content'], name = request.POST['name'], email = request.POST['email'], post = post)
+  comment.save()
   return redirect("/post/%s" % post.slug)
 
+#Session Views
 def login_view(request):
   return render(request, 'blog/login.html')
 
