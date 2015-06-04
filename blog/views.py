@@ -51,16 +51,52 @@ def post_create(request):
   
   return redirect("/post/%s" % post.slug)
 
-class PostUpdateForm(forms.ModelForm):
-  class Meta:
-    model = Post
-    exclude = ('slug', 'user', 'date')
+# class PostUpdateForm(forms.ModelForm):
+#   class Meta:
+#     model = Post
+#     exclude = ('slug', 'user', 'date')
 
-class PostUpdateView(UpdateView):
-  model = Post
-  success_url = '/'
-  fields = ['title', 'content']
-  form_class = PostUpdateForm
+# class PostUpdateView(UpdateView):
+#   model = Post
+#   success_url = '/'
+#   fields = ['title', 'content']
+#   form_class = PostUpdateForm
+
+def post_edit(request, slug):
+  post = Post.objects.get(slug=slug)
+  tags = Tag.objects.all()
+  checked_tags = []
+  for posttag in post.posttags_set.all():
+    checked_tags.append(posttag.tag)
+
+  return render_to_response('blog/post_edit.html', locals(), context_instance=RequestContext(request))
+
+def post_edited(request, slug):
+  post = Post.objects.get(slug=slug)
+  post.title = request.POST['title']
+  post.content = request.POST['content']
+  post.save()
+
+  #new tag ids to assign to post
+  updated_tag_ids = request.POST.getlist('tags')
+
+  #remove empty strings from list
+  filter(None,updated_tag_ids)
+
+  #check if currently assigned tags are in the updated_tag list, if not, delete the posttag object
+  for pt in post.posttags_set.all():
+    if pt.tag.id not in updated_tag_ids: 
+      pt.delete()
+    else:
+      updated_tag_ids.remove(pt.tag)
+  
+  for tag_id in updated_tag_ids:
+    tag = Tag.objects.get(pk=tag_id)
+    pt = PostTags(post=post,tag=tag)
+    pt.save()
+
+  success_url = "/post/%s" % post.slug
+  return redirect(success_url)
 
 class PostDeleteView(DeleteView):
   model = Post

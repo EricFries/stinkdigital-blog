@@ -26,6 +26,12 @@
 
 		<p>{{ post.content|safe|truncatewords:80 }}</p>
 		<a href="/post/{{ post.slug}}">Continue Reading...</a>
+		<div class="post-tags">
+			<p>Filed Under: </p>
+			{% for pt in post.posttags_set.all %}
+				<p>{{pt.tag}}</p>
+			{% endfor %}
+		</div>
 	</div>
 	{% endfor %}
 

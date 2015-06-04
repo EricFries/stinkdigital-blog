@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url 
 
-from blog.views import PostDetailView, PostDeleteView, PostUpdateView
+from blog.views import PostDetailView, PostDeleteView
 from django.contrib.auth.decorators import login_required
 
 # Uncomment the next two lines to enable the admin:
@@ -11,12 +11,13 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'blog.views.posts_index'),
 
-    url(r'^post/new/', 'blog.views.post_new'),
+    url(r'^post/new/', 'blog.views.post_new', name="post_new"),
     url(r'^post/create/', 'blog.views.post_create'),
     url(r'^posts/', 'blog.views.posts_index'),
     url(r'^post/(?P<slug>[-\w]+)/$', PostDetailView.as_view(), name='post-detail'),
     url(r'^post/delete/(?P<slug>[-\w]+)/$', login_required(PostDeleteView.as_view())),
-    url(r'^post/edit/(?P<slug>[-\w]+)/$',PostUpdateView.as_view()),
+    url(r'^post/edit/(?P<slug>[-\w]+)/$','blog.views.post_edit'),
+    url(r'^post/edited/(?P<slug>[-\w]+)/$','blog.views.post_edited'),
 
     url(r'^comment/create/', 'blog.views.comment_create'),
     url(r'^comment/delete/', 'blog.views.comment_delete'),
