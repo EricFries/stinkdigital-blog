@@ -1,30 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="col-md-8 col-md-offset-2">
+	<h1>Login</h1>
 
-<h1>Login</h1>
+	{% if messages %}
+		<div class="alert alert-danger" role="alert">
+		  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		  <span class="sr-only">Error:</span>
 
-{% if messages %}
-<div class="alert alert-danger" role="alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
+			<div class="messages">
+			    {% for message in messages %}
+			    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+			    {% endfor %}
+			</div>
+		</div>
+	{% endif %}
 
-	<ul class="messages">
-	    {% for message in messages %}
-	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-	    {% endfor %}
-	</ul>
+	<form action="/accounts/auth/" method="post"> 
+		{% csrf_token %}
+
+			<div class="form-group">
+			  Username: <input type="text" name="username" class="form-control" required><br>
+			  Password: <input type="text" name="password" class="form-control" required><br>
+			<input type="submit" value="Login" class="form-control"/>
+		</div>
+	</form>
 </div>
-{% endif %}
-
-<form action="/accounts/auth/" method="post"> 
-	{% csrf_token %}
-	<div class="col-md-8">
-		<div class="form-group">
-		  Username: <input type="text" name="username" class="form-control" required><br>
-		  Password: <input type="text" name="password" class="form-control" required><br>
-		<input type="submit" value="Login" class="form-control"/>
-	</div>
-</form>
-
 {% endblock content%}
