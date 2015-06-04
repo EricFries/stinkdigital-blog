@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div id="edit-post">
+<div id="edit-post" class="col-md-8 col-md-offset-2">
 	<h1>Edit Post</h1>
 	<form method="post">{% csrf_token %}
 		{{ form.non_field_errors }}

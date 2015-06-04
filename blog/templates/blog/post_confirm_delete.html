@@ -2,10 +2,9 @@
 
 {% block content %}
 
-<div id="delete-post">
+<div id="delete-post" class="col-md-8 col-md-offset-2">
 	<h1>Delete Post</h1>
 	<form action="" method="post">{% csrf_token %}
-		<div class="col-md-8">
 			<div class="form-group">
 	    	<p>Are you sure you want to delete "{{ object }}"? There is no going back...</p>
 	    	<input type="submit" value="Confirm" class="form-control btn btn-danger"/>

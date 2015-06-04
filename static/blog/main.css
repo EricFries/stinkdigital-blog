@@ -6,3 +6,26 @@ body { font-family: 'Roboto', sans-serif;
 
 .nav li { font-family: 'Roboto', sans-serif; font-weight: 100; 
 }
+
+#footer {
+	background-color: #DCDCDC;
+	position: fixed; 
+	bottom: 0;
+	width: 100%;
+}
+
+.top-buffer {
+	margin-top: 40px;
+}
+
+.top-buffer-lg {
+	margin-top: 70px;
+}
+
+.top-buffer-sm {
+	margin-top: 25px;
+}
+
+.post-title{
+	display: inline;
+}
