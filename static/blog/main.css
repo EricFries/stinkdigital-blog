@@ -8,10 +8,18 @@ body { font-family: 'Roboto', sans-serif;
 }
 
 #footer {
-	background-color: rgba(243,243,243,0.9);
+/*	background-color: rgba(243,243,243,0.9);*/
+	background-color: rgba(193,27,100,0.9);
 	position: fixed; 
 	bottom: 0;
 	width: 100%;
+	color:white;
+	font-family: 'Roboto', sans-serif; font-weight: 100;
+}
+
+#footer a{
+	color:white;
+	font-family: 'Roboto', sans-serif; font-weight: 100;
 }
 
 .top-buffer {
@@ -37,4 +45,24 @@ body { font-family: 'Roboto', sans-serif;
 #headline{
 font-size: 54px;
   letter-spacing: 0.5em;
+}
+
+h1 a { 
+	text-decoration:none;
+	color:black; 
+}
+
+h1 a:visited { 
+	text-decoration:none;
+	color:black; 
+}
+
+h1 a:hover { 
+	text-decoration:none;
+	color:black; 
+}
+
+h1 a:active { 
+	text-decoration:none;
+	color:black; 
 }
