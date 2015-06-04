@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="post top-buffer">
+<div class="post top-buffer col-md-8 col-md-offset-2">
 	<h1 class="post-title">{{ post.title }}</h1>
 		{% if user.is_authenticated %}
 			<a href="/post/delete/{{ post.slug}}"><span class="glyphicon glyphicon-trash"></span></a>
@@ -13,7 +13,7 @@
 </div>
 
 {% if post.comment_set.all %}
-	<div id="comment-group" class="top-buffer-sm">
+	<div id="comment-group" class="top-buffer-sm col-md-8 col-md-offset-2">
 			{% if post.comment_set.all|length_is:"1" %}
 				<h4>{{post.comment_set.all|length}} Comment: </h4>
 
@@ -25,8 +25,7 @@
 		{% for comment in post.comment_set.all %}
 			<div class="comment">
 				<ul>
-					<li>{{comment.content}}</li>
-				  <li>by <a href='mailto:{{comment.email}}'>{{comment.name}}</a> at {{comment.date|date}} </li>
+					<li>On {{comment.date|date}}, <a href='mailto:{{comment.email}}'>{{comment.name}}</a> said, "{{comment.content}}" </a></li>
 				</ul>
 			</div>
 
@@ -34,7 +33,7 @@
 				<div class="row">
 					<form action="/comment/delete/" method="post"> 
 						{% csrf_token %}
-						<div class="col-md-6">
+						<div class="col-md-6 col-md-offset-3">
 							<div class="form-group">
 							  <input type="hidden" name="id" value="{{ comment.id }}">
 							  <input type="hidden" name="post_slug" value="{{ post.slug }}">
@@ -49,7 +48,7 @@
 	</div>
 {% endif %}
 
-<div id="leave-comment">
+<div id="leave-comment" class="col-md-8 col-md-offset-4">
 	<h4>Leave a Comment:</h4>
 	<form action="/comment/create/" method="post"> 
 		{% csrf_token %}
@@ -57,7 +56,7 @@
 			<div class="form-group">
 			  Name: <input type="text" name="name" class="form-control" required><br>
 			  Email: <input type="text" name="email" class="form-control" required><br>
-			  Content: <textarea name="content" rows="3" class="form-control" required></textarea><br>
+			  Comment: <textarea name="content" rows="3" class="form-control" required></textarea><br>
 			  <input type="hidden" name="post_id" value="{{ post.id }}">
 				<input type="submit" value="Comment" class="form-control"/>
 			</div>

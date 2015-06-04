@@ -14,21 +14,22 @@
 				<div class="container-fluid">
 					<a href="/" class="navbar-brand">STINKDIGITAL-BLOG</a>
 						<ul class="nav navbar-nav pull-right">
-							<li><a href="/">All Posts</a></li>
+							
 	
 							{% if user.is_authenticated %}
+								<li><a href="/">Manage Posts</a></li>
 							  <li><a href="/post/new">New Post</a></li>
 							  <li><a href="/logout">Logout</a></li>
 								<p class="navbar-text">Welcome, {{ user.username }} !</p>
 						  {% else %}
-						  	<li><a href="/login">Login</a></li>
+						  	<li><a href="/">All Posts</a></li>
 							{% endif %}
 
 						</ul>
 					</div>
 				</nav>
 
-			<div id="content">
+			<div id="content" class="bottom-buffer">
 				<div class="container">
 					<div class="col-md-12">
 
@@ -42,26 +43,22 @@
 		<div id="footer" class='top-buffer'>
       <div class='container'>
         <div class='row'>
-
           <div class='col-md-2'>
-          <h4>About the Author</h4>
-          <p>This author is one serious writer. </p>
-          <p><a href='/'>Author's Posts</a></p>
+	          <h4>About the Author</h4>
+	          <p>This author is one serious writer. </p>
           </div>
 
           <div class='col-md-2 col-md-offset-8'>
-          <h4>Contact the Author</h4>
-          <ul>
-            <li>Brooklyn, NY</li>
-            <li>555-NO-CALLS</li>
-            <li><a href='mailto:ericfries@gmail.com'>ericfries@gmail.com</a></li>
-          </ul>
-          
+	          <h4>Contact the Author</h4>
+	          <ul>
+	            <li>Brooklyn, NY</li>
+	            <li><a href='mailto:ericfries@gmail.com'>ericfries@gmail.com</a></li>
+	          </ul>
           </div>
+
         </div>
       </div>
-        <center><p>Author &copy;2015.</p></center>
     </div>
-		</div>
+	</div>
 	</body>
 </html>

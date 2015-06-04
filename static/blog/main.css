@@ -8,7 +8,7 @@ body { font-family: 'Roboto', sans-serif;
 }
 
 #footer {
-	background-color: #DCDCDC;
+	background-color: rgba(243,243,243,0.9);
 	position: fixed; 
 	bottom: 0;
 	width: 100%;
@@ -19,7 +19,7 @@ body { font-family: 'Roboto', sans-serif;
 }
 
 .top-buffer-lg {
-	margin-top: 70px;
+	margin-top: 80px;
 }
 
 .top-buffer-sm {
@@ -28,4 +28,8 @@ body { font-family: 'Roboto', sans-serif;
 
 .post-title{
 	display: inline;
+}
+
+.bottom-buffer{
+	margin-bottom: 145px;
 }
