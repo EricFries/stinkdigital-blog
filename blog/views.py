@@ -12,36 +12,22 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-import pdb
-
-#Tag Views
-# @login_required
-def tag_new(request):
-  return render(request, 'blog/new_tag.html')
-
-# @login_required
-def tag_create(request):
-  tag = Tag(name = request.POST['name'], slug = slugify(request.POST['name']))
-  tag.save()
-  return redirect("/post/new")
-
 #Post CRUD views
 def posts_index(request):
   posts = Post.objects.all().order_by('-date')
   return render_to_response('blog/index.html', locals(), context_instance=RequestContext(request)
     )
 
-# @login_required
+@login_required
 def post_new(request):
   tags = Tag.objects.all()
   return render_to_response('blog/post_new.html', locals(), context_instance=RequestContext(request)
     )
 
-# @login_required
+@login_required
 def post_create(request):
-  post = Post(title = request.POST['title'], content = request.POST['content'], slug = slugify(request.POST['title']))
+  post = Post(title = request.POST['title'], content = request.POST['content'], user = request.user, slug = slugify(request.POST['title']))
   post.save()
-  # user = request.user,
 
   tags_list = request.POST.getlist('tags')
   for tag_id in tags_list:
@@ -51,17 +37,7 @@ def post_create(request):
   
   return redirect("/post/%s" % post.slug)
 
-# class PostUpdateForm(forms.ModelForm):
-#   class Meta:
-#     model = Post
-#     exclude = ('slug', 'user', 'date')
-
-# class PostUpdateView(UpdateView):
-#   model = Post
-#   success_url = '/'
-#   fields = ['title', 'content']
-#   form_class = PostUpdateForm
-
+@login_required
 def post_edit(request, slug):
   post = Post.objects.get(slug=slug)
   tags = Tag.objects.all()
@@ -71,25 +47,24 @@ def post_edit(request, slug):
 
   return render_to_response('blog/post_edit.html', locals(), context_instance=RequestContext(request))
 
+@login_required
 def post_edited(request, slug):
   post = Post.objects.get(slug=slug)
   post.title = request.POST['title']
   post.content = request.POST['content']
   post.save()
 
-  #new tag ids to assign to post
+  #New tag ids to assign to edited post
   updated_tag_ids = request.POST.getlist('tags')
 
-  #remove empty strings from list
-  filter(None,updated_tag_ids)
-
-  #check if currently assigned tags are in the updated_tag list, if not, delete the posttag object
+  #Check if currently assigned tags are in the updated_tag list, if not, delete the posttag object.  If they are, remove them from the list of tags to add to the post.
   for pt in post.posttags_set.all():
     if pt.tag.id not in updated_tag_ids: 
       pt.delete()
     else:
       updated_tag_ids.remove(pt.tag)
   
+  #For tags remaining, create new posttag objects
   for tag_id in updated_tag_ids:
     tag = Tag.objects.get(pk=tag_id)
     pt = PostTags(post=post,tag=tag)
@@ -123,6 +98,17 @@ def comment_create(request):
   comment = Comment(content = request.POST['content'], name = request.POST['name'], email = request.POST['email'], post = post)
   comment.save()
   return redirect("/post/%s" % post.slug)
+
+#Tag Views
+@login_required
+def tag_new(request):
+  return render(request, 'blog/new_tag.html')
+
+@login_required
+def tag_create(request):
+  tag = Tag(name = request.POST['name'], slug = slugify(request.POST['name']))
+  tag.save()
+  return redirect("/post/new")
 
 #Session Views
 def login_view(request):
