@@ -1,23 +1,22 @@
 {% extends "base.html" %}
 
+{%load css%}
+
 {% block content %}
 
 <div id="edit-post" class="col-md-8 col-md-offset-2">
 	<h1>Edit Post</h1>
 	<form method="post">{% csrf_token %}
+	<div class="form-group">
 		{{ form.non_field_errors }}
-		<div>
 			<h4>Title:</h4>
     	{{ form.subject.errors }}
-    	{{ form.title }}
-    	<br>
-		</div>
-		<div>
+    	{{form.title|addcss:"form-control"}}
     	<h4>Content:</h4>
    	  {{ form.message.errors }}
-    	{{ form.content }}
-		</div>
-	 <input type="submit" value="Submit" class="btn btn-default" />
+    	{{ form.content|addcss:"form-control" }}<br>
+	 <input type="submit" value="Submit" class="form-control btn btn-default" />
+	 </div>
 	</form>
 </div>
 

@@ -122,7 +122,6 @@ INSTALLED_APPS = (
     'djangotoolbox',
     'autoload',
     'dbindexer',
-    'widget_tweaks',
     'blog',
     # djangoappengine should come last, so it can override a few manage.py commands
     'djangoappengine',
@@ -161,3 +160,4 @@ LOGGING = {
 LOGIN_URL = '/login'
 STATIC_ROOT = 'static'
 STATIC_URL  = '/static/'
+
