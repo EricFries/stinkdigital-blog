@@ -12,6 +12,13 @@
 	<p>{{ post.content|safe }}</p>
 </div>
 
+<div class="post-tags col-md-8 col-md-offset-2">
+	<p>Filed Under: </p>
+		{% for pt in post.posttags_set.all %}
+			<p>{{pt.tag}}</p>
+		{% endfor %}
+</div>
+
 {% if post.comment_set.all %}
 	<div id="comment-group" class="top-buffer-sm col-md-8 col-md-offset-2">
 			{% if post.comment_set.all|length_is:"1" %}

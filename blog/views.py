@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, render, redirect
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.template import RequestContext
-from .models import Post, Comment
+from .models import Post, Comment, Tag, PostTags
 from django.utils.text import slugify
 from django import forms
 
@@ -12,6 +12,18 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+import pdb
+
+#Tag Views
+# @login_required
+def tag_new(request):
+  return render(request, 'blog/new_tag.html')
+
+# @login_required
+def tag_create(request):
+  tag = Tag(name = request.POST['name'], slug = slugify(request.POST['name']))
+  tag.save()
+  return redirect("/post/new")
 
 #Post CRUD views
 def posts_index(request):
@@ -19,14 +31,24 @@ def posts_index(request):
   return render_to_response('blog/index.html', locals(), context_instance=RequestContext(request)
     )
 
-@login_required
+# @login_required
 def post_new(request):
-  return render(request, 'blog/new.html')
+  tags = Tag.objects.all()
+  return render_to_response('blog/post_new.html', locals(), context_instance=RequestContext(request)
+    )
 
-@login_required
+# @login_required
 def post_create(request):
-  post = Post(title = request.POST['title'], content = request.POST['content'], user = request.user, slug = slugify(request.POST['title']))
+  post = Post(title = request.POST['title'], content = request.POST['content'], slug = slugify(request.POST['title']))
   post.save()
+  # user = request.user,
+
+  tags_list = request.POST.getlist('tags')
+  for tag_id in tags_list:
+    tag = Tag.objects.get(pk=tag_id)
+    pt = PostTags(post=post,tag=tag)
+    pt.save()
+  
   return redirect("/post/%s" % post.slug)
 
 class PostUpdateForm(forms.ModelForm):

@@ -15,10 +15,21 @@
     	<h4>Content:</h4>
    	  {{ form.message.errors }}
     	{{ form.content|addcss:"form-control" }}<br>
+
+<!-- <div class="post-tags col-md-8 col-md-offset-2">
+
+	<p>Filed Under: </p>
+		{% for pt in post.posttags_set.all %}
+			<p>{{pt.tag}}</p>
+			<label class="checkbox-inline"><input type="checkbox" name="tags" value="{{ pt.tag.id }}" checked>{{tag.name}}</label>
+		{% endfor %}
+</div> -->
+
 	 <input type="submit" value="Submit" class="form-control btn btn-default" />
 	 </div>
 	</form>
 </div>
+
 
 {% endblock content%}
 

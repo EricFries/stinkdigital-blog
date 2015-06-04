@@ -10,15 +10,19 @@ from django.contrib.auth.decorators import login_required
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'blog.views.posts_index'),
+
     url(r'^post/new/', 'blog.views.post_new'),
     url(r'^post/create/', 'blog.views.post_create'),
     url(r'^posts/', 'blog.views.posts_index'),
     url(r'^post/(?P<slug>[-\w]+)/$', PostDetailView.as_view(), name='post-detail'),
     url(r'^post/delete/(?P<slug>[-\w]+)/$', login_required(PostDeleteView.as_view())),
-    url(r'^post/edit/(?P<slug>[-\w]+)/$', login_required(PostUpdateView.as_view())),
+    url(r'^post/edit/(?P<slug>[-\w]+)/$',PostUpdateView.as_view()),
 
     url(r'^comment/create/', 'blog.views.comment_create'),
     url(r'^comment/delete/', 'blog.views.comment_delete'),
+
+    url(r'^tag/new/', 'blog.views.tag_new'),
+    url(r'^tag/create/', 'blog.views.tag_create'),
 
     url(r'^login/', 'blog.views.login_view'),
     url(r'^logout/', 'blog.views.logout_view'),
