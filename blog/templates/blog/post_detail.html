@@ -9,7 +9,7 @@
 			<a href="/post/edit/{{ post.slug}}"><span class="glyphicon glyphicon-pencil"></span></a>
 		{% endif %}
 	<h4>Posted by {{ post.user.username}} on {{ post.date|date }}</h4>
-	<p>{{ post.content }}</p>
+	<p>{{ post.content|safe }}</p>
 </div>
 
 {% if post.comment_set.all %}

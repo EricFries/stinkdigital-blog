@@ -2,12 +2,12 @@
 {% block content %}
 
 	<center>
-		<h1>STINKDIGITAL-BLOG</h1>
+		<h1 id="headline">STINKDIGITAL-BLOG</h1>
 	</center>
 	
 	{% for post in posts %}
 	<div class="post-summary top-buffer col-md-8 col-md-offset-2">
-		<h2 class="post-title">{{ post.title }}</h2>
+		<h1 class="post-title">{{ post.title }}</h2>
 		{% if user.is_authenticated %}
 			<a href="/post/delete/{{ post.slug}}"><span class="glyphicon glyphicon-trash"></span></a>
 
@@ -24,7 +24,7 @@
 			<p>{{post.comment_set.all|length}} Comments</p>
 		{% endif %}
 
-		<p>{{ post.content|truncatewords:80 }}</p>
+		<p>{{ post.content|safe|truncatewords:80 }}</p>
 		<a href="/post/{{ post.slug}}">Continue Reading...</a>
 	</div>
 	{% endfor %}
