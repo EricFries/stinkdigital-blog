@@ -12,9 +12,9 @@
 		<h4>Title:</h4>
 		<input type="text" value="{{post.title}}" name="title" class="form-control" required>
 		<h4>Content:</h4>
-		  <textarea name="content" rows="5" class="form-control" required>{{post.content}}</textarea>
+		  <textarea name="content" rows="15" class="form-control" required>{{post.content}}</textarea>
 
-		<div class="post-tags col-md-8 col-md-offset-2">
+		<div class="post-tags bottom-buffer-sm top-buffer-sm">
 			<p>Filed Under: </p>
 
 			{% for tag in tags %}

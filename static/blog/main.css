@@ -42,6 +42,10 @@ body { font-family: 'Roboto', sans-serif;
 	margin-bottom: 145px;
 }
 
+.bottom-buffer-sm{
+	margin-bottom: 25px;
+}
+
 #headline{
 font-size: 54px;
   letter-spacing: 0.5em;
