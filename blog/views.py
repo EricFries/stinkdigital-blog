@@ -110,6 +110,7 @@ def comment_create(request):
   response_data['content'] = comment.content
   response_data['id'] = comment.id
   response_data['date'] = comment.date.strftime("%B %d, %Y")
+  response_data['count'] = post.comment_set.all().count()
 
   return HttpResponse(json.dumps(response_data), content_type="application/json")
 

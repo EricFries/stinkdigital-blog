@@ -21,13 +21,15 @@
 
 
 	<div id="comment-group" class="top-buffer-sm col-md-8 col-md-offset-2">
+		<h4 id="comment-count">
 			{% if post.comment_set.all|length_is:"1" %}
-				<h4>{{post.comment_set.all|length}} Comment: </h4>
+				{{post.comment_set.all|length}} Comment: </h4>
 
 				{% else %}
 
-				<h4>{{post.comment_set.all|length}} Comments:</h4>
+				{{post.comment_set.all|length}} Comments:
 			{% endif %}
+			</h4>
 
 		{% for comment in post.comment_set.all %}
 			<div class="comment" id="{{comment.id}}">
