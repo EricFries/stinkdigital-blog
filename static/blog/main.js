@@ -17,8 +17,10 @@ $(document).ready(function(){
 	deleteComment();
 });
 
+
+//Listener is delegated to parent because of dynamcially generated delete forms
 function deleteComment(){
-	$('.comment-delete-form').on('submit', function(e){
+	$('#comment-group').on('click', '.comment-delete-form', function(e){
 		e.preventDefault();
 		e.stopPropagation();
 		var commentId = $(this).find('.form-group').children().first().val();
@@ -29,7 +31,7 @@ function deleteComment(){
 			data: {id: commentId},
 			success: function(json){
 				var deletedCommentID = String(json.id);
-				$("#" + deletedCommentID).slideUp();
+				$("#" + deletedCommentID).remove();
 				$("#comment-delete-form" + deletedCommentID).slideUp();
 				updateCommentCount(json.count);
 			}

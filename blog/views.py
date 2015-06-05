@@ -8,8 +8,9 @@ from .models import Post, Comment, Tag, PostTags
 from django.utils.text import slugify
 from django import forms
 
-#for comment create
+#for comment create & delete
 from django.template.loader import render_to_string
+from django.views.decorators.csrf import csrf_exempt
 
 #Login/Authentication
 from django.contrib.auth import authenticate, login, logout
@@ -91,6 +92,7 @@ class PostDetailView(DetailView):
 
 #Comment Views
 @login_required
+@csrf_exempt
 def comment_delete(request):
   comment = Comment.objects.get(pk=request.POST['id'])
   post = comment.post
@@ -109,18 +111,11 @@ def comment_create(request):
   comment = Comment(content = request.POST['content'], name = request.POST['name'], email = request.POST['email'], post = post)
   comment.save()
 
-  if request.is_ajax():
-    html = render_to_string('blog/new_comment.html', {'comment': comment})
-    return HttpResponse(html)
-  # response_data = {}
-  # response_data['name'] = comment.name
-  # response_data['email'] = comment.email
-  # response_data['content'] = comment.content
-  # response_data['id'] = comment.id
-  # response_data['date'] = comment.date.strftime("%B %d, %Y")
-  # # response_data['count'] = post.comment_set.all().count()
+  user_id = request.user.id
 
-  # return HttpResponse(json.dumps(response_data), content_type="application/json")
+  if request.is_ajax():
+    html = render_to_string('blog/new_comment.html', {'comment': comment, 'user_id': request.user.id})
+    return HttpResponse(html)
 
 #Tag Views
 @login_required
