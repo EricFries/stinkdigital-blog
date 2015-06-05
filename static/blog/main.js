@@ -31,6 +31,7 @@ function deleteComment(){
 				var deletedCommentID = String(json.id);
 				$("#" + deletedCommentID).slideUp();
 				$("#comment-delete-form" + deletedCommentID).slideUp();
+				updateCommentCount(json.count);
 			}
 		});
 	});
@@ -57,18 +58,19 @@ function createComment(){
             $('#comment-content').val("");
             // add new comment
             $("#comment-group").append("<div class='comment' id='" + json.id + "''><ul><li> On " + json.date + " " + "<a href='mailto:" + json.email +"'>" + json.name + "</a> said, " + json.content + "</li></ul></div");
-            debugger
             // update comment count
-            if (json.count === 1){
-            	$("#comment-count").html(json.count + " Comment");
-          		}
-        		else {
-        			$("#comment-count").html(json.count + " Comments");
-          		}
+            updateCommentCount(json.count);
         },
 		});
 	});
 }
 
-
+function updateCommentCount(count){
+	if (count === 1){
+		$("#comment-count").html(count + " Comment:");
+  		}
+	else {
+		$("#comment-count").html(count + " Comments:");
+  		}
+}
 
