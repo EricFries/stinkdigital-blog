@@ -8,6 +8,9 @@ from .models import Post, Comment, Tag, PostTags
 from django.utils.text import slugify
 from django import forms
 
+#for comment create
+from django.template.loader import render_to_string
+
 #Login/Authentication
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -106,15 +109,18 @@ def comment_create(request):
   comment = Comment(content = request.POST['content'], name = request.POST['name'], email = request.POST['email'], post = post)
   comment.save()
 
-  response_data = {}
-  response_data['name'] = comment.name
-  response_data['email'] = comment.email
-  response_data['content'] = comment.content
-  response_data['id'] = comment.id
-  response_data['date'] = comment.date.strftime("%B %d, %Y")
-  response_data['count'] = post.comment_set.all().count()
+  if request.is_ajax():
+    html = render_to_string('blog/new_comment.html', {'comment': comment})
+    return HttpResponse(html)
+  # response_data = {}
+  # response_data['name'] = comment.name
+  # response_data['email'] = comment.email
+  # response_data['content'] = comment.content
+  # response_data['id'] = comment.id
+  # response_data['date'] = comment.date.strftime("%B %d, %Y")
+  # # response_data['count'] = post.comment_set.all().count()
 
-  return HttpResponse(json.dumps(response_data), content_type="application/json")
+  # return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 #Tag Views
 @login_required

@@ -49,15 +49,15 @@ function createComment(){
 					email: $('#comment-email').val(), 
 					content: $('#comment-content').val()
 				},
-			 success: function(json) {
+			 success: function(data) {
              // clear fields
             $('#comment-name').val("");
             $('#comment-email').val("");
             $('#comment-content').val("");
             // add new comment
-            $("#comment-group").append("<div class='comment' id='" + json.id + "''><ul><li> On " + json.date + " " + "<a href='mailto:" + json.email +"'>" + json.name + "</a> said, " + json.content + "</li></ul></div");
+            $("#comment-group").append(data);
 
-            updateCommentCount(json.count);
+            updateCommentCount($(".comment").length);
         },
 		});
 	});
