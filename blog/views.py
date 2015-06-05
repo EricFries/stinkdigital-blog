@@ -90,17 +90,16 @@ class PostDetailView(DetailView):
 @login_required
 def comment_delete(request):
   comment = Comment.objects.get(pk=request.POST['id'])
-  count = comment.post.comment_set.all().count()
+  post = comment.post
+  
   response_data = {}
-  # post_slug = request.POST['post_slug']
-  # success_url = "/post/%s" % post_slug
   response_data['id'] = comment.id
   comment.delete()
+  post.save()
+  count = post.comment_set.all().count()
   response_data['count'] = count
   
   return HttpResponse(json.dumps(response_data), content_type="application/json")
-  
-  # return redirect(success_url)
 
 def comment_create(request):
   post = Post.objects.get(pk=request.POST['post_id'])

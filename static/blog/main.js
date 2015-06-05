@@ -37,8 +37,6 @@ function deleteComment(){
 	});
 }
 
-// $(this).find('.form-group').children().first().val()
-
 function createComment(){
 		$('#comment-submit').on('click', function(e){
 			e.preventDefault();
@@ -58,7 +56,7 @@ function createComment(){
             $('#comment-content').val("");
             // add new comment
             $("#comment-group").append("<div class='comment' id='" + json.id + "''><ul><li> On " + json.date + " " + "<a href='mailto:" + json.email +"'>" + json.name + "</a> said, " + json.content + "</li></ul></div");
-            // update comment count
+
             updateCommentCount(json.count);
         },
 		});
@@ -73,4 +71,3 @@ function updateCommentCount(count){
 		$("#comment-count").html(count + " Comments:");
   		}
 }
-
