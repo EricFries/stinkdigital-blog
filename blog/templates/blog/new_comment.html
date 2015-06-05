@@ -2,7 +2,9 @@
 				<ul id="comment-list">
 					<li>On {{comment.date|date}}, <a href='mailto:{{comment.email}}'>{{comment.name}}</a> said, "{{comment.content}}"</li>
 				</ul>
-			</div>
+</div>
+
+
 
 {% if user_id %}
 	<div class="row">
@@ -18,3 +20,4 @@
 		</form>
 	</div>
 {% endif %}
+
