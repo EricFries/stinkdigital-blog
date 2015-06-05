@@ -87,7 +87,7 @@ class PostDetailView(DetailView):
     return context
 
 #Comment Views
-# @login_required
+@login_required
 def comment_delete(request):
   comment = Comment.objects.get(pk=request.POST['id'])
   count = comment.post.comment_set.all().count()
