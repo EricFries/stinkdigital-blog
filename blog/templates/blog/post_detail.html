@@ -38,7 +38,7 @@
 				</ul>
 			</div>
 
-
+			{% if user.is_authenticated %}
 				<div class="row">
 					<form action="/comment/delete/" method="post" class="comment-delete-form"id ="comment-delete-form{{comment.id}}" > 
 						{% csrf_token %}
@@ -51,7 +51,7 @@
 						</div>
 					</form>
 				</div>
-
+			{% endif %}
 
 		{% endfor %}
 	</div>
