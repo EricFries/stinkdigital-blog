@@ -4,17 +4,17 @@
 				</ul>
 			</div>
 
-			{% if user.is_authenticated %}
-				<div class="row">
-					<form action="/comment/delete/" method="post" class="comment-delete-form"id ="comment-delete-form{{comment.id}}" > 
-						{% csrf_token %}
-						<div class="col-md-6 col-md-offset-3">
-							<div class="form-group">
-							  <input type="hidden" name="id" value="{{ comment.id }}">
-							  <input type="hidden" name="post_slug" value="{{ post.slug }}">
-								<input type="submit" value="Delete Comment" class="form-control btn btn-info"/>
-							</div>
-						</div>
-					</form>
+{% if user_id %}
+	<div class="row">
+		<form action="/comment/delete/" method="post" class="comment-delete-form" id ="comment-delete-form{{comment.id}}" > 
+			{% csrf_token %}
+			<div class="col-md-6 col-md-offset-3">
+				<div class="form-group">
+				  <input type="hidden" name="id" value="{{ comment.id }}">
+				  <input type="hidden" name="post_slug" value="{{ post.slug }}">
+					<input type="submit" value="Delete Comment" class="form-control btn btn-info"/>
 				</div>
-			{% endif %}
+			</div>
+		</form>
+	</div>
+{% endif %}

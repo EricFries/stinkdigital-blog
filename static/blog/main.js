@@ -17,8 +17,9 @@ $(document).ready(function(){
 	deleteComment();
 });
 
+// Event listener must be delegated to parent to capture submission of dynamically generated delete forms
 function deleteComment(){
-	$('.comment-delete-form').on('submit', function(e){
+	$('#comment-group').on('submit', '.comment-delete-form', function(e){
 		e.preventDefault();
 		e.stopPropagation();
 		var commentId = $(this).find('.form-group').children().first().val();

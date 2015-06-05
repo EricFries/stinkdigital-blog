@@ -109,18 +109,11 @@ def comment_create(request):
   comment = Comment(content = request.POST['content'], name = request.POST['name'], email = request.POST['email'], post = post)
   comment.save()
 
-  if request.is_ajax():
-    html = render_to_string('blog/new_comment.html', {'comment': comment})
-    return HttpResponse(html)
-  # response_data = {}
-  # response_data['name'] = comment.name
-  # response_data['email'] = comment.email
-  # response_data['content'] = comment.content
-  # response_data['id'] = comment.id
-  # response_data['date'] = comment.date.strftime("%B %d, %Y")
-  # # response_data['count'] = post.comment_set.all().count()
+  user_id = request.user.id
 
-  # return HttpResponse(json.dumps(response_data), content_type="application/json")
+  if request.is_ajax():
+    html = render_to_string('blog/new_comment.html', {'comment': comment, 'user_id': user_id})
+    return HttpResponse(html)
 
 #Tag Views
 @login_required
