@@ -27,7 +27,7 @@
 		<p>{{ post.content|safe|truncatewords:80 }}</p>
 		<a href="/post/{{ post.slug}}">Continue Reading...</a><br>
 
-		<div class="post-tags top-buffer-sm">
+		<div class="post-tags top-buffer-xs">
 			<h4>Filed Under: </h4>
 			{% for pt in post.posttags_set.all %}
 				<p>{{pt.tag}}</p>

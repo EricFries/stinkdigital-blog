@@ -10,7 +10,7 @@
 			  Title: <input type="text" name="title" class="form-control" required><br>
 			  Content: <textarea name="content" rows="15" class="form-control" placeholder="Enter your post in plain text or with HTML formatting." required></textarea><br>
 				<div class="post-tags bottom-buffer-sm top-buffer-sm">
-					<p>Filed Under:</p>
+					<p>File Under:</p>
 					{% for tag in tags%}
 						<label class="checkbox-inline"><input type="checkbox" name="tags" value="{{ tag.id }}">{{tag.name}}</label>
 					{% endfor %}

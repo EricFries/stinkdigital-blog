@@ -34,6 +34,10 @@ body { font-family: 'Roboto', sans-serif;
 	margin-top: 25px;
 }
 
+.top-buffer-xs {
+	margin-top: 12px;
+}
+
 .post-title{
 	display: inline;
 }
