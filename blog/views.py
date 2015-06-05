@@ -1,3 +1,5 @@
+from django.http import HttpResponse
+import json
 from django.shortcuts import render_to_response, render, redirect
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView, DeleteView
@@ -85,19 +87,31 @@ class PostDetailView(DetailView):
     return context
 
 #Comment Views
-@login_required
+# @login_required
 def comment_delete(request):
   comment = Comment.objects.get(pk=request.POST['id'])
-  post_slug = request.POST['post_slug']
-  success_url = "/post/%s" % post_slug
+  # post_slug = request.POST['post_slug']
+  # success_url = "/post/%s" % post_slug
+  response_data = {'id': comment.id}
   comment.delete()
-  return redirect(success_url)
+
+  return HttpResponse(json.dumps(response_data), content_type="application/json")
+  
+  # return redirect(success_url)
 
 def comment_create(request):
   post = Post.objects.get(pk=request.POST['post_id'])
   comment = Comment(content = request.POST['content'], name = request.POST['name'], email = request.POST['email'], post = post)
   comment.save()
-  return redirect("/post/%s" % post.slug)
+
+  response_data = {}
+  response_data['name'] = comment.name
+  response_data['email'] = comment.email
+  response_data['content'] = comment.content
+  response_data['id'] = comment.id
+  response_data['date'] = comment.date.strftime("%B %d, %Y")
+
+  return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 #Tag Views
 @login_required

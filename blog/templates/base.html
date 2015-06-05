@@ -3,9 +3,11 @@
 	<head>
 		<link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
 		<script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+		<script src='//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js'></script>
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
 		{% load staticfiles %} 
 		<link rel='stylesheet' href="{% static 'blog/main.css'%}" />
+		<script src='{% static "blog/main.js"%}'></script>
 
 	</head>
 
@@ -20,7 +22,7 @@
 								<li><a href="/">Manage Posts</a></li>
 							  <li><a href="/post/new">New Post</a></li>
 							  <li><a href="/logout">Logout</a></li>
-								<p class="navbar-text">Welcome, {{ user.username }} !</p>
+								<p class="navbar-text">Welcome, {{ user.username }}!</p>
 						  {% else %}
 						  	<li><a href="/">All Posts</a></li>
 							{% endif %}
