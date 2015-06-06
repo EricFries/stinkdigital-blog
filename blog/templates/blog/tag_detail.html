@@ -2,7 +2,7 @@
 {% block content %}
 
 	<center>
-		<h1 id="headline">STINKDIGITAL-BLOG</h1>
+		<h1 id="headline">{{tag|title}} Posts</h1>
 	</center>
 	
 	{% for post in posts %}
@@ -30,7 +30,7 @@
 		<div class="post-tags top-buffer-xs">
 			<h4>Filed Under: </h4>
 			{% for pt in post.posttags_set.all %}
-				<a href="/tag/{{ pt.tag.slug }}">{{pt.tag}}</a>
+				<p>{{pt.tag}}</p>
 			{% endfor %}
 		</div>
 	</div>

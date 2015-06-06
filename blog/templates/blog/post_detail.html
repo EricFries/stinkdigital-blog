@@ -15,7 +15,7 @@
 <div class="post-tags col-md-8 col-md-offset-2">
 	<h4>Filed Under: </h4>
 		{% for pt in post.posttags_set.all %}
-			<p>{{pt.tag}}</p>
+			<a href="/tag/{{ pt.tag.slug }}">{{pt.tag}}</a>
 		{% endfor %}
 </div>
 

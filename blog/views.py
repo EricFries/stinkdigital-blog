@@ -136,7 +136,7 @@ def tag_detail(request, slug):
     posts.append(pt.post)
 
   # posts = posts.order_by('-date')
-  return render_to_response('blog/index.html', locals(), context_instance=RequestContext(request)
+  return render_to_response('blog/tag_detail.html', locals(), context_instance=RequestContext(request)
     )
 
 #Session Views
