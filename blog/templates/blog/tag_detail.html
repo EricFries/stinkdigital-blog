@@ -30,7 +30,7 @@
 		<div class="post-tags top-buffer-xs">
 			<h4>Filed Under: </h4>
 			{% for pt in post.posttags_set.all %}
-				<p>{{pt.tag}}</p>
+				<a href="/tag/{{ pt.tag.slug }}">{{pt.tag}}</a>
 			{% endfor %}
 		</div>
 	</div>
