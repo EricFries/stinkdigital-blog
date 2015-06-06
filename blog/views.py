@@ -63,7 +63,7 @@ def post_edited(request, slug):
   #New tag ids to assign to edited post
   updated_tag_ids = request.POST.getlist('tags')
 
-  #Check if currently assigned tags are in the updated_tag list, if not, delete the posttag object.  If they are, remove them from the list of tags to add to the post.
+  #Check if currently assigned tags are in the updated_tag list, if not, delete the posttag object.  If they are, remove them from the list of tags to add to the post since they are already associated with that post.
   for pt in post.posttags_set.all():
     if pt.tag.id not in updated_tag_ids: 
       pt.delete()
@@ -127,6 +127,17 @@ def tag_create(request):
   tag = Tag(name = request.POST['name'], slug = slugify(request.POST['name']))
   tag.save()
   return redirect("/post/new")
+
+def tag_detail(request, slug):
+  tag = Tag.objects.get(slug=slug)
+  posts = []
+
+  for pt in tag.posttags_set.all():
+    posts.append(pt.post)
+
+  # posts = posts.order_by('-date')
+  return render_to_response('blog/index.html', locals(), context_instance=RequestContext(request)
+    )
 
 #Session Views
 def login_view(request):

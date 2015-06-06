@@ -24,6 +24,7 @@ urlpatterns = patterns('',
 
     url(r'^tag/new/', 'blog.views.tag_new'),
     url(r'^tag/create/', 'blog.views.tag_create'),
+    url(r'^tag/(?P<slug>[-\w]+)/$','blog.views.tag_detail'),
 
     url(r'^login/', 'blog.views.login_view'),
     url(r'^logout/', 'blog.views.logout_view'),
